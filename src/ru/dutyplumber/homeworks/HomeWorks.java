@@ -1,205 +1,146 @@
-//домашнее задание №2. Смоляков Андрей
+//домашнее задание №3. Смоляков Андрей
 
 package ru.dutyplumber.homeworks;
 
-import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
 
 public class HomeWorks {
-    public static void main(String[] args) {
-
-        /*
-        1. Задать целочисленный массив, состоящий из элементов 0 и 1.
-         Например: [ 1, 1, 0, 0, 1, 0, 1, 1, 0, 0 ].
-         С помощью цикла и условия заменить 0 на 1, 1 на 0;
-        */
-
-        int[] arrayForFirstEx = {1, 1, 1, 0, 0, 0, 1, 1, 1};
-
-        System.out.println("Задание 1. Было: " + Arrays.toString(arrayForFirstEx));
-
-        for (int cycleCount = 0; cycleCount < arrayForFirstEx.length; ++cycleCount) {
-            if (arrayForFirstEx[cycleCount] == 1) {
-                arrayForFirstEx[cycleCount] = 0;
-            } else arrayForFirstEx[cycleCount] = 1;
-        }
-
-        System.out.println("Задание 1. Стало: " + Arrays.toString(arrayForFirstEx));
-
-
-        // 2. Задать пустой целочисленный массив размером 8.
-        // С помощью цикла заполнить его значениями 0 3 6 9 12 15 18 21;
-
-        int[] arrayForSecondEx = new int[8];
-
-        for (int cycleCount = 1; cycleCount < arrayForSecondEx.length; ++cycleCount) {
-            arrayForSecondEx[cycleCount] = (arrayForSecondEx[cycleCount - 1]) + 3;
-        }
-
-        System.out.println("Задание 2: " + Arrays.toString(arrayForSecondEx));
-
-
-        // 3. Задать массив [ 1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1 ] пройти по нему циклом,
-        // и числа меньшие 6 умножить на 2;
-
-        int[] arrayForThirdEx = new int[]{1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
-
-        for (int cyrcleCount = 0; cyrcleCount < arrayForThirdEx.length; ++cyrcleCount) {
-            if (arrayForThirdEx[cyrcleCount] < 6)
-            {
-                arrayForThirdEx[cyrcleCount] = arrayForThirdEx[cyrcleCount] * 2;
-            }
-            else ;
-        }
-
-        System.out.println("Задание 3: " + Arrays.toString(arrayForThirdEx));
-
-
-        // 4. Создать квадратный двумерный целочисленный массив (количество строк и столбцов одинаковое),
-        // и с помощью цикла(-ов) заполнить его диагональные элементы единицами;
-
-
-        int xCoordinate = 0; //длина строки
-        int yCoordinate = 0; //количество строк (высота)
-
-        int[][] arrayForFourthEx = new int[5][5];
-
-        // заполняем диагональ единицами в одном направлении
-        for (int cycleCount = 0; cycleCount < 5; ++cycleCount) {
-            arrayForFourthEx[xCoordinate][yCoordinate] = 1;
-            xCoordinate = xCoordinate + 1;
-            yCoordinate = yCoordinate + 1;
-        }
-        //меняем координаты и заполняем диагональ единицами в другом направлении
-
-        xCoordinate = 4;
-        yCoordinate = 0;
-
-        for (int cycleCount = 0; cycleCount < 5; ++cycleCount) {
-            // заполняем диагональ единицами в одном направлении
-            arrayForFourthEx[xCoordinate][yCoordinate] = 1;
-            xCoordinate = xCoordinate - 1;
-            yCoordinate = yCoordinate + 1;
-        }
-
-        // а теперь выводим для наглядности
-        System.out.println("Задание 4.");
-        for (int countForPrinting = 0; countForPrinting < arrayForFourthEx.length; ++countForPrinting) {
-            System.out.println(Arrays.toString(arrayForFourthEx[countForPrinting]));
-        }
-
-
-        // 5. ** Задать одномерный массив и найти в нем
-        // минимальный и максимальный элементы (без помощи интернета)
-        // ...было бы дебильно списывать в нашей истории, isn't it?
-
-        int[] arrayForFifth = new int[]{2, 11, 3, 5, 7, 12, 45, 6, -2, 9, 14, 21, 46, -8, 0, -10};
-
-        int FifthArrayMinimal = arrayForFifth[0]; // устанавливаем минимум равный первому значению в массиве
-        int FifthArrayMaximum = arrayForFifth[0]; // также и максимум - "исходная"
-
-        // цикл для поиска минимального значения
-        for (int cycleCount = 0; cycleCount < arrayForFifth.length; ++cycleCount) {
-            if (arrayForFifth[cycleCount] < FifthArrayMinimal) {
-                FifthArrayMinimal = arrayForFifth[cycleCount];
-            } else ;
-        }
-
-        // цикл для поиска максимального значения
-        for (int cycleCount = 0; cycleCount < arrayForFifth.length; ++cycleCount) {
-            if (arrayForFifth[cycleCount] > FifthArrayMaximum) {
-                FifthArrayMaximum = arrayForFifth[cycleCount];
-            } else ;
-        }
-
-        System.out.println("Задание 5. Минимальное значение в массиве: " + FifthArrayMinimal);
-        System.out.println("Задание 5. Максимальное значение в массиве: " + FifthArrayMaximum);
-
-
-
-
-
-
-        /*
-         6. ** Написать метод, в который передается не пустой одномерный целочисленный массив,
-         метод должен вернуть true, если в массиве есть место, в котором сумма левой и правой
-         части массива равны. Примеры: checkBalance([2, 2, 2, 1, 2, 2, || 10, 1]) → true,
-         checkBalance([1, 1, 1, || 2, 1]) → true, граница показана символами ||,
-         эти символы в массив не входят.
-        */
-
-        int[] arrayForSixthEx = new int[]{3, 4, 1, 1, 1, 1, 1, 1, 1}; //можно подавать произвольный - считает все!!! :)
-        System.out.println( "Задание 6. " + isThereEqualParts ( arrayForSixthEx ));
-
-
-
-        /*
-         7. **** Написать метод, которому на вход подается одномерный массив
-         и число n (может быть положительным, или отрицательным),
-         при этом метод должен сместить все элементымассива на n позиций.
-         Для усложнения задачи нельзя пользоваться вспомогательными массивами.
-        */
-
-        int[] arrayForSeventhEx = new int[]{1, 2, 3, 4, 5, 4, 3, 2, 1}; //можно подавать произвольный - сдвигает все!!! :)
-        int Number_n = 2; //устанавливаем число "сдвига"
-        System.out.println("Задание 7. Было: " + Arrays.toString(arrayForSeventhEx));
-        System.out.println( "Задание 7. Стало: " + Arrays.toString(movedArray (arrayForSeventhEx, Number_n)));
-    }
-
-
-
-    //метод для задания 6
-    public static boolean isThereEqualParts (int [] arrayForSixthEx)
+    public static void main(String[] args)
     {
-        // подсчитываем сумму всех элементов массива
-        int allOverArraySum = 0;
+        for (; ; ) {
+            System.out.println("Cыграем в числа или слова? \n" +
+                    "Введите 1 для игры в числа  и 2 для игры в слова:");
+            Scanner obj = new Scanner(System.in);
 
-        for (int cycleCount = 0; cycleCount < arrayForSixthEx.length; ++ cycleCount)
-        {
-            allOverArraySum = allOverArraySum + arrayForSixthEx [cycleCount];
+            int choice = obj.nextByte();
+
+                if (choice == 1) randomNumber();
+                else if (choice == 2) guessWord();
+                else System.out.println("Введите корректный номер выбора, пожалуйста");
+
         }
-
-        //сумма проверяемой левой части массива
-        int leftPartArraySum = 0;
-
-
-         // Считаем сумму левой части массива, постепенно увеличивая ее и сравниваем с уменьшающейся оставшейся (правой)
-         // частью
-
-
-        for (int cycleCount = 0; cycleCount < arrayForSixthEx.length; ++ cycleCount)
-        {
-            leftPartArraySum = leftPartArraySum + arrayForSixthEx [cycleCount];
-            if (leftPartArraySum == allOverArraySum - leftPartArraySum) { return true;}
-            else ;
-        }
-        return false;
     }
 
-
-
-    // метод для задания 7
-    public static int [] movedArray(int[] arrayForSeventhEx, int Number_n)
+    public static void randomNumber ()
     {
-        int temporary = 0; // временная переменная для переноса значений
+         /*
+         1. Написать программу, которая загадывает случайное число от 0 до 9,
+         и пользователю дается 3 попытки угадать это число.
+         При каждой попытке компьютер должен сообщить больше ли указанное
+         пользователем число чем загаданное, или меньше.
+         После победы или проигрыша выводится запрос –
+         «Повторить игру еще раз? 1 – да / 0 – нет»(1 – повторить, 0 – нет).
+        */
+        Scanner obj = new Scanner (System.in);
+        Random randomNumber = new Random();
 
-        if (Number_n > 0) // работа метода в случае положительного сдвига
+        System.out.println("Машина загадала число от 0 до 9. \n" +
+        "Попробуйте угадать стрех попыток");
+
+        int machineNumber = randomNumber.nextInt (10);
+
+        for ( int cycleCount=0; cycleCount<3; ++cycleCount)
         {
-            for (int cycleCount = arrayForSeventhEx.length; cycleCount > 0; --cycleCount)
+            System.out.println("Попытка " + (cycleCount + 1) + ":\n");
+            int userNumber = obj.nextInt();
+
+            if (machineNumber == userNumber)
             {
-                if (cycleCount - Number_n - 1 < 0) { temporary = 0;} //проверили, есть ли откуда брать значения (слева по ряду)
-                else {temporary = arrayForSeventhEx[cycleCount - Number_n - 1];} //перенесли значение ячейки во временную переменную
-                arrayForSeventhEx[cycleCount - 1] = 0 + temporary;
+                System.out.println("Угадали!");
+                return;
             }
-        }
-        else // работа метода в случае отрицательного сдвига
-        {
-            for (int cycleCount = 0; cycleCount < arrayForSeventhEx.length; ++cycleCount)
+            else if (machineNumber < userNumber)
             {
-                if (cycleCount + Math.abs (Number_n) > arrayForSeventhEx.length - 1) { temporary = 0;} //проверили, есть ли откуда брать значения (справа по ряду)
-                else {temporary = arrayForSeventhEx[cycleCount + Math.abs(Number_n)];} //перенесли значение ячейки во временную переменную
-                arrayForSeventhEx[cycleCount] = 0 + temporary;
+                System.out.println("Неверно. Ваше число больше загаданного.");
             }
+            else if (machineNumber > userNumber)
+            {
+                System.out.println("Неверно. Ваше число меньше загаданного.");
+            }
+
         }
-      return arrayForSeventhEx;
+
+        System.out.println("Загаданное число: " + machineNumber);
+
     }
+
+    public static void guessWord ()
+    {
+        /*
+        Создать массив из слов String[] words = {"apple", "orange", "lemon", "banana", "apricot", "avocado", "broccoli",
+         "carrot", "cherry", "garlic", "grape", "melon", "leak", "kiwi", "mango", "mushroom", "nut", "olive", "pea",
+          "peanut", "pear", "pepper", "pineapple", "pumpkin", "potato"};
+        При запуске программы компьютер загадывает слово, запрашивает ответ у пользователя,
+        сравнивает его с загаданным словом и сообщает правильно ли ответил пользователь. Если слово не угадано,
+        компьютер показывает буквы которые стоят на своих местах.
+        apple – загаданное
+        apricot - ответ игрока
+        ap############# (15 символов, чтобы пользователь не мог узнать длину слова)
+        Для сравнения двух слов посимвольно, можно пользоваться:
+        String str = "apple";
+        str.charAt(0); - метод, вернет char, который стоит в слове str на первой позиции
+        Играем до тех пор, пока игрок не отгадает слово
+        Используем только маленькие буквы
+        */
+
+        String[] words = {"apple", "orange", "lemon", "banana", "apricot", "avocado", "broccoli",
+                "carrot", "cherry", "garlic", "grape", "melon", "leak", "kiwi", "mango", "mushroom", "nut", "olive", "pea",
+                "peanut", "pear", "pepper", "pineapple", "pumpkin", "potato"};
+        System.out.println("Компьютер загадал одно из слов: apple, orange, lemon, banana, apricot, avocado, broccoli,\n" +
+                "carrot, cherry, garlic, grape, melon, leak, kiwi, mango, mushroom, nut, olive, pea, peanut, pear,\n" +
+                "pepper, pineapple, pumpkin, potato\n" +
+                "Попробуйте угадать, а компьютер будет подсказывать\n");
+
+        Random randomNumber = new Random();
+        String machineWord = words[randomNumber.nextInt(words.length)];
+
+        Scanner obj = new Scanner(System.in);
+
+        for (;;)
+        {
+            String userWord = obj.next();
+            int additionalCycleCount = 0;
+            if (!userWord.equals(machineWord))
+            {
+                // цикл перебора букв в словах
+                for (int cycleCount = 0; cycleCount < machineWord.length() & cycleCount < userWord.length(); ++cycleCount)
+                {
+                    if (machineWord.charAt(cycleCount) == userWord.charAt(cycleCount))
+                    {
+                        System.out.print(machineWord.charAt(cycleCount));
+                    } else System.out.print("#");
+                    additionalCycleCount = ++additionalCycleCount;
+                }
+
+                //цикл дописывания ###
+                for (int cycleCount = additionalCycleCount; cycleCount < (15 - machineWord.length()); ++cycleCount)
+                {
+                    System.out.print("#");
+                }
+
+                System.out.println("\nПопробуйте снова.\n");
+            }
+            else
+                {
+                System.out.println("Вы угадали!\n");
+                return;
+                }
+        }
+    }
+
 }
+
+
+
+
+
+
+       // System.out.println( unknownNumber );
+
+
+
+
+
+
+
